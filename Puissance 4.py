@@ -21,15 +21,20 @@ shift_y = 30
 
 # Différentes fonctions
 def afficher_cercle_jaune(event):
+        global cercle_jaune
         """Fonction permettant d'afficher un cercle jaune"""
         x, y = event.x, event.y
-        canevas.create_oval(x,y,(x+75),(y+75),fill="yellow",width=2, outline="yellow")
+        cercle_jaune = canevas.create_oval(x,y,(x+75),(y+75),fill="yellow",width=2, outline="yellow")
     
 
 def afficher_cercle_rouge(event):
     """Fonction permettant d'afficher un cercle rouge"""
+    global cercle_rouge
     x, y = event.x, event.y
-    canevas.create_oval(x,y,(x+75),(y+75),fill="red",width=2, outline="red")
+    cercle_rouge =canevas.create_oval(x,y,(x+75),(y+75),fill="red",width=2, outline="red")
+
+
+
 
 
 
@@ -37,7 +42,7 @@ def afficher_cercle_rouge(event):
 
    
 # Création de la fenêtre
-fenetre = tk.Tk()  # Création de la fenêtre 
+fenetre = tk.Tk()   
 fenetre.title("Un jeu de Puissance 4")  #Titre
 fenetre.geometry("1920x1080") # Dimension de la fenêtre
 
@@ -51,6 +56,7 @@ canevas.create_text(1200,100,text=joueur1 + "  :",font=("Times New Roman","20","
 canevas.create_text(1200,400,text=joueur2 + "  :",font=("Times New Roman","20","italic"))
 canevas.create_text(1300,100,text="0",font=("Times New Roman","20","italic"))
 canevas.create_text(1300,400,text="0",font=("Times New Roman","20","italic"))
+
 
 
 
@@ -82,6 +88,6 @@ canevas.bind('<Button-1>', afficher_cercle_jaune)
 
 
 
-fenetre.mainloop() #Boucle Principale
+print(plateau)
 
 
