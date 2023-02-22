@@ -1,5 +1,5 @@
 import tkinter as tk
-  
+import random as rd 
 
 joueur1 = input("Entrez le nom du joueur 1 :  ")
 joueur2 = input("Entrez le nom du joueur 2 : ")
@@ -22,26 +22,33 @@ shift_y = 30
 # Différentes fonctions
 def afficher_cercle_jaune(event):
         """Fonction permettant d'afficher un cercle jaune"""
-        global cercle_jaune
         x, y = event.x, event.y
-        cercle_jaune = canevas.create_oval(x,y,(x+50),(y+50),fill="yellow",width=2, outline="yellow")
+        canevas.create_oval(x,y,(x+50),(y+50),fill="yellow",width=2, outline="yellow")
+        
+    
     
 
 def afficher_cercle_rouge(event):
     """Fonction permettant d'afficher un cercle rouge"""
-    global cercle_rouge
     x, y = event.x, event.y
-    cercle_rouge = canevas.create_oval(x,y,(x+50),(y+50),fill="red",width=2, outline="red")
-
-
-def deplacement():
-    canevas.move(cercle_rouge,0,grid_height)
-    canevas.move(cercle_jaune,0,grid_height)
-    fenetre.after(10,deplacement)
+    canevas.create_oval(x,y,(x+50),(y+50),fill="red",width=2, outline="red")
+    
+    
 
 
 
+    
+       
+        
+def annuler_coup():
+    "Fonction qui permet d'annuler le coup précédemment joué"
+    i = 0
+    if afficher_cercle_rouge:
+       canevas.delete(canevas.create_oval(x,y,(x+50),(y+50),fill="red",width=2, outline="red"))
+    elif afficher_cercle_jaune:
+       canevas.delete(canevas.create_oval(x,y,(x+50),(y+50),fill="yellow",width=2, outline="yellow"))
 
+    
 
    
 # Création de la fenêtre
@@ -61,10 +68,8 @@ canevas.create_text(1300,100,text="0",font=("Times New Roman","20","italic"))
 canevas.create_text(1300,400,text="0",font=("Times New Roman","20","italic"))
 
 
-
-
-
-
+# Boutons
+bouton = tk.Button(fenetre,text="Annuler le coup",bg="blue",fg="yellow",font=("helvetica","20","italic"),command=annuler_coup)
 
 
 # Création de la Grille
@@ -79,22 +84,21 @@ for i in range(max(grid_height,grid_width)+1):
 
 
 
-# Placement du Canevas
+# Placement des Widgets
+bouton.grid()
 canevas.grid()
 
 
 canevas.bind('<Button-3>', afficher_cercle_rouge)
 canevas.bind('<Button-1>', afficher_cercle_jaune)
 
-print(deplacement())
 
+fenetre.mainloop()
 
 """ Partie Logique du Puissance 4 """
 
 
 
 
-
-fenetre.mainloop()
 
 
