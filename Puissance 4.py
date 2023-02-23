@@ -22,31 +22,29 @@ shift_y = 30
 # Différentes fonctions
 def afficher_cercle_jaune(event):
         """Fonction permettant d'afficher un cercle jaune"""
+        global cercle_jaune
         x, y = event.x, event.y
-        canevas.create_oval(x,y,(x+50),(y+50),fill="yellow",width=2, outline="yellow")
+        cercle_jaune = canevas.create_oval(x,y,(x+50),(y+50),fill="yellow",width=2, outline="yellow")
         
     
     
 
 def afficher_cercle_rouge(event):
     """Fonction permettant d'afficher un cercle rouge"""
+    global cercle_rouge
     x, y = event.x, event.y
-    canevas.create_oval(x,y,(x+50),(y+50),fill="red",width=2, outline="red")
+    cercle_rouge = canevas.create_oval(x,y,(x+50),(y+50),fill="red",width=2, outline="red")
     
     
+def annuler_cercle_rouge():
+    canevas.delete(cercle_rouge)
 
 
-
-    
+def annuler_cercle_jaune():
+    canevas.delete(cercle_jaune)
        
         
-def annuler_coup():
-    "Fonction qui permet d'annuler le coup précédemment joué"
-    i = 0
-    if afficher_cercle_rouge:
-       canevas.delete(canevas.create_oval(x,y,(x+50),(y+50),fill="red",width=2, outline="red"))
-    elif afficher_cercle_jaune:
-       canevas.delete(canevas.create_oval(x,y,(x+50),(y+50),fill="yellow",width=2, outline="yellow"))
+
 
     
 
@@ -69,8 +67,8 @@ canevas.create_text(1300,400,text="0",font=("Times New Roman","20","italic"))
 
 
 # Boutons
-bouton = tk.Button(fenetre,text="Annuler le coup",bg="blue",fg="yellow",font=("helvetica","20","italic"),command=annuler_coup)
-
+bouton = tk.Button(fenetre,text="Supprimer un cercle rouge",bg="blue",fg="yellow",font=("helvetica","20","italic"),command=annuler_cercle_rouge)
+bouton2 = tk.Button(fenetre,text="Supprimer un cercle jaune",bg="blue",fg="yellow",font=("helvetica","20","italic"),command= annuler_cercle_jaune)
 
 # Création de la Grille
 x = 0
@@ -85,6 +83,7 @@ for i in range(max(grid_height,grid_width)+1):
 
 
 # Placement des Widgets
+bouton2.grid()
 bouton.grid()
 canevas.grid()
 
