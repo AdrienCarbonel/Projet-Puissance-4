@@ -9,21 +9,17 @@ joueur2 = input("Entrez le nom du joueur 2 : ")
 starter = rd.choice((str(joueur1),str(joueur2)))
 tour = starter
 
-tour_counter = 0
 
-if starter == joueur1:
+
+def tour_2():
+    global tour_counter
     tour_counter = 0
-elif starter == joueur2:
-    tour_counter = 1
-
-def tour():
-    tour_counter += 1
     if tour_counter % 2 == 0:
         tour = joueur1
-        '''label.configure(text ="C'est au tour de" + str(tour))'''
+        label.configure(text ="C'est au tour de" + str(tour))
     elif tour_counter % 2 == 1:
         tour = joueur2
-        '''label.configure(text = "C'est au tour de" + str(tour))'''
+        label.configure(text = "C'est au tour de" + str(tour))
     
          
     
@@ -44,7 +40,8 @@ def afficher_cercle_jaune(event):
         global cercle_jaune
         x, y = event.x, event.y
         cercle_jaune = canevas.create_oval(x,y,(x+50),(y+50),fill="yellow",width=2, outline="yellow")
-        tour()
+        tour_2()
+        tour_counter += 1
         
     
 
@@ -53,7 +50,8 @@ def afficher_cercle_rouge(event):
     global cercle_rouge
     x, y = event.x, event.y
     cercle_rouge = canevas.create_oval(x,y,(x+50),(y+50),fill="red",width=2, outline="red")
-    tour()
+    tour_2()
+    tour_counter += 1
     
     
 def annuler_cercle_rouge():
@@ -91,7 +89,7 @@ canevas.create_text(1200,100,text=joueur1 + "  :",font=("Times New Roman","20","
 canevas.create_text(1200,400,text=joueur2 + "  :",font=("Times New Roman","20","italic"))
 canevas.create_text(1300,100,text="0",font=("Times New Roman","20","italic"))
 canevas.create_text(1300,400,text="0",font=("Times New Roman","20","italic"))
-label = canevas.create_text(500, 650, text= "C'est le tour de " + str(tour), font=("Times New Roman","20","italic"))
+label = canevas.create_text(500, 650, text= "C'est le tour de    " + str(tour), font=("Times New Roman","20","italic"))
 
 
 # Boutons
