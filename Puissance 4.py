@@ -1,7 +1,7 @@
 import tkinter as tk
 import random as rd 
 
-joueur1 = input("Entrez le nom du joueur 1 :  ")
+joueur1 = input("Entrez le nom du joueur 1 : ")
 joueur2 = input("Entrez le nom du joueur 2 : ")
 
 
@@ -11,19 +11,20 @@ tour = starter
 
 tour_counter = 0
 
-if starter == joueur1:
+'''if starter == joueur1:
     tour_counter = 0
 elif starter == joueur2:
-    tour_counter = 1
+    tour_counter = 1'''
 
-def tour():
-    tour_counter += 1
+
+
+def round():
     if tour_counter % 2 == 0:
         tour = joueur1
-        '''label.configure(text ="C'est au tour de" + str(tour))'''
+        label.configure(text ="C'est au tour de" + str(tour))
     elif tour_counter % 2 == 1:
         tour = joueur2
-        '''label.configure(text = "C'est au tour de" + str(tour))'''
+        label(text = "C'est au tour de" + str(tour))
     
          
     
@@ -41,19 +42,36 @@ shift_y = 30
 # Différentes fonctions
 def afficher_cercle_jaune(event):
         """Fonction permettant d'afficher un cercle jaune"""
-        global cercle_jaune
+        global cercle_jaune, tour_counter
         x, y = event.x, event.y
         cercle_jaune = canevas.create_oval(x,y,(x+50),(y+50),fill="yellow",width=2, outline="yellow")
-        tour()
+        tour_counter += 1
+        label3.config(text= "tours  :" + str(tour_counter))
+        if tour_counter % 2 == 0:
+            tour = joueur1
+            label.config(text ="C'est au tour de " + str(tour))
+        if tour_counter % 2 == 1:
+            tour = joueur2
+            label.config(text = "C'est au tour de " + str(tour))
+
         
     
 
 def afficher_cercle_rouge(event):
     """Fonction permettant d'afficher un cercle rouge"""
-    global cercle_rouge
+    global cercle_rouge, tour_counter
     x, y = event.x, event.y
     cercle_rouge = canevas.create_oval(x,y,(x+50),(y+50),fill="red",width=2, outline="red")
-    tour()
+    tour_counter += 1
+    label3.config(text= "tours  :" + str(tour_counter))
+    if tour_counter % 2 == 0:
+        tour = joueur1
+        label.config(text ="C'est au tour de " + str(tour))
+    if tour_counter % 2 == 1:
+        tour = joueur2
+        label.config(text = "C'est au tour de " + str(tour))
+
+
     
     
 def annuler_cercle_rouge():
@@ -72,7 +90,12 @@ def deplacement1():
             elif tour == joueur2:
                 plateau[7][i] = -1
 
+''''def detection_cord():'''
 
+def update(event):
+    global tour_counter
+    tour_counter += 1
+    
     
 
    
@@ -91,8 +114,8 @@ canevas.create_text(1200,100,text=joueur1 + "  :",font=("Times New Roman","20","
 canevas.create_text(1200,400,text=joueur2 + "  :",font=("Times New Roman","20","italic"))
 canevas.create_text(1300,100,text="0",font=("Times New Roman","20","italic"))
 canevas.create_text(1300,400,text="0",font=("Times New Roman","20","italic"))
-label = canevas.create_text(500, 650, text= "C'est le tour de " + str(tour), font=("Times New Roman","20","italic"))
-
+label = tk.Label(fenetre, text="C'est au tour de  :" + str(tour))
+label3 = tk.Label(fenetre, text="tours  :" + str(tour_counter))
 
 # Boutons
 bouton = tk.Button(fenetre,text="Supprimer un cercle rouge",bg="blue",fg="yellow",font=("helvetica","20","italic"),command=annuler_cercle_rouge)
@@ -116,10 +139,13 @@ bouton2.grid()
 bouton.grid()
 canevas.grid()
 
+label.place(x= 800, y= 800)
+label3.place(x= 500, y= 800)
 
-canevas.bind('<Button-3>', afficher_cercle_rouge)
+
+
 canevas.bind('<Button-1>', afficher_cercle_jaune)
-
+canevas.bind('<Button-3>', afficher_cercle_rouge)
 
 fenetre.mainloop()
 
