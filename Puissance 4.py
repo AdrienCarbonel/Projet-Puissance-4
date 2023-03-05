@@ -4,12 +4,12 @@ import random as rd
 joueur1 = input("Entrez le nom du joueur 1 : ")
 joueur2 = input("Entrez le nom du joueur 2 : ")
 
-
+tour_counter = 0
 
 starter = rd.choice((str(joueur1),str(joueur2)))
 tour = starter
 
-tour_counter = 0
+
 
 '''if starter == joueur1:
     tour_counter = 0
@@ -21,6 +21,7 @@ elif starter == joueur2:
 def round():
     if tour_counter % 2 == 0:
         tour = joueur1
+        label.configure(text ="C'est au tour de" + str(tour))
         label.configure(text ="C'est au tour de" + str(tour))
     elif tour_counter % 2 == 1:
         tour = joueur2
@@ -49,10 +50,10 @@ def afficher_cercle_jaune(event):
         label3.config(text= "tours  :" + str(tour_counter))
         if tour_counter % 2 == 0:
             tour = joueur1
-            label.config(text ="C'est au tour de " + str(tour))
+            label.config(text ="C'est au tour de : " + str(tour))
         if tour_counter % 2 == 1:
             tour = joueur2
-            label.config(text = "C'est au tour de " + str(tour))
+            label.config(text = "C'est au tour de : " + str(tour))
 
         
     
@@ -66,10 +67,10 @@ def afficher_cercle_rouge(event):
     label3.config(text= "tours  :" + str(tour_counter))
     if tour_counter % 2 == 0:
         tour = joueur1
-        label.config(text ="C'est au tour de " + str(tour))
+        label.config(text ="C'est au tour de : " + str(tour))
     if tour_counter % 2 == 1:
         tour = joueur2
-        label.config(text = "C'est au tour de " + str(tour))
+        label.config(text = "C'est au tour de : " + str(tour))
 
 
     
@@ -114,8 +115,9 @@ canevas.create_text(1200,100,text=joueur1 + "  :",font=("Times New Roman","20","
 canevas.create_text(1200,400,text=joueur2 + "  :",font=("Times New Roman","20","italic"))
 canevas.create_text(1300,100,text="0",font=("Times New Roman","20","italic"))
 canevas.create_text(1300,400,text="0",font=("Times New Roman","20","italic"))
-label = tk.Label(fenetre, text="C'est au tour de  :" + str(tour))
-label3 = tk.Label(fenetre, text="tours  :" + str(tour_counter))
+label = tk.Label(fenetre, text= "C'est au tour de : " + str(tour))
+label3 = tk.Label(text= "Tour : " + str(tour_counter))
+
 
 # Boutons
 bouton = tk.Button(fenetre,text="Supprimer un cercle rouge",bg="blue",fg="yellow",font=("helvetica","20","italic"),command=annuler_cercle_rouge)
