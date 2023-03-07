@@ -1,5 +1,8 @@
 # Projet-Puissance-4
 
-Collaborateurs : Adrien Carbonel , Danny Isaid , Mehdi Bouchaffra
+Collaborateurs : Adrien Carbonel  , Mehdi Bouchaffra
 
-Groupe MI ( Mathématiques Informatiques ) TD 04
+Licence 1ère année portail Mathématiques-Informatiques (MI) TD 04
+
+
+Le lien GitHub du projet Puissance 4 : https://github.com/AdrienCarbonel/Projet-Puissance-4
