@@ -21,10 +21,10 @@ elif starter == joueur2:
 def round():
     if (tour_counter % 2 == 0):
         tour = joueur1
-        label.config(text ="C'est au tour de       :" + "    "  +str(tour))
+        label.config(text ="C'est au tour de :    " + str(tour))
     elif (tour_counter % 2 == 1):
         tour = joueur2
-        label.config(text= "C'est au tour de       :" + "    " +str(tour))
+        label.config(text= "C'est au tour de :    " + str(tour))
     
          
     
@@ -47,10 +47,10 @@ def affiche_cercle(event):
     y = event.y
     if (tour_counter % 2 == 0):
         cercle = canevas.create_oval(x,y,(x+50),(y+50),width=2,fill="yellow",outline="yellow")
-        label3.config(text="Tour         :     " + str(tour_counter))
+        label3.config(text="Tour :      " + str(tour_counter))
     if (tour_counter % 2 == 1):
         cercle = canevas.create_oval(x,y,(x+50),(y+50),width=2,fill="red",outline="red")
-        label3.config(text="Tour         :     " + str(tour_counter))
+        label3.config(text="Tour :      " + str(tour_counter))
     tour_counter += 1
     round()
         
@@ -93,12 +93,14 @@ label_joueur1 = tk.Label(fenetre,text=joueur1 + "  :",font=("Times New Roman","2
 label_joueur2 = tk.Label(fenetre,text=joueur2 + "  :",font=("Times New Roman","20","italic"),bg="white")
 label_score_joueur1 = tk.Label(fenetre,text= str(score),font=("Times New Roman","20","italic"),bg="white")
 label_score_joueur2 = tk.Label(fenetre,text= str(score),font=("Times New Roman","20","italic"),bg="white")
-label = tk.Label(fenetre, text= "C'est au tour de :    " + str(tour),bg="white")
-label3 = tk.Label(fenetre,text= "Tour :      " + str(tour_counter))
+label = tk.Label(fenetre, text= "C'est au tour de :    " + str(tour),bg="white",font=("Times New Roman","20"))
+label3 = tk.Label(fenetre,text= "Tour :      " + str(tour_counter),bg="white",font=("Times New Roman","20"))
 
 
 # Bouton pour supprimer un cercle
 suppression_cercle = tk.Button(fenetre,text="Supprimer un cercle",command= supprimer_cercle,bg="red",fg="yellow",height=3,font=("Times New Roman","20","italic"))
+
+
 # Création de la Grille
 x = 0
 y = 0
@@ -112,8 +114,8 @@ for i in range(max(grid_height,grid_width)+1):
 
 
 # Placement des Widgets
-label.place(x=1000,y=700)
-label3.grid()
+label.place(x=1200,y=700)
+label3.place(x=1200,y=650)
 suppression_cercle.place(x=500,y=650)
 label_joueur1.place(x=1200,y=100)
 label_joueur2.place(x=1200,y=400)
