@@ -17,14 +17,6 @@ elif starter == joueur2:
     tour_counter = 1'''
 
 
-
-def round():
-    if (tour_counter % 2 == 0):
-        tour = joueur1
-        label.config(text ="C'est au tour de :    " + str(tour))
-    elif (tour_counter % 2 == 1):
-        tour = joueur2
-        label.config(text= "C'est au tour de :    " + str(tour))
     
          
     
@@ -40,34 +32,62 @@ shift_x = 50
 shift_y = 30
 
 # Différentes fonctions
+
+def placement():
+    for i in range(len(plateau)):
+        for j in range(len(plateau)):
+            if (affiche_cercle) and (cercle == canevas.create_oval(x1,y1,(x1+50),(y1+50),width=2,fill="yellow",outline="yellow")):
+               plateau[i][j] == 1
+            if (affiche_cercle) and (cercle == canevas.create_oval(x1,y1,(x1+50),(y1+50),width=2,fill="red",outline="red")):
+               plateau[i][j] == -1
+    print(plateau)
+
+def deplacement():
+    canevas.move(cercle,0,3.10*taille_case_height)
+    fenetre.after(2000000000,deplacement)
+
+def round():
+    if (tour_counter % 2 == 0):
+        tour = joueur1
+        label.config(text ="C'est au tour de :    " + str(tour))
+    elif (tour_counter % 2 == 1):
+        tour = joueur2
+        label.config(text= "C'est au tour de :    " + str(tour))
+
+
+
+
 def affiche_cercle(event):
     """ Fonction permettant d'afficher un cercle rouge ou jaune selon la parité de la variable tour_counter """
-    global cercle, tour_counter
-    x = event.x
-    y = event.y
+    global cercle, tour_counter, x1, y1
+    x1 = event.x
+    y1 = event.y
     if (tour_counter % 2 == 0):
-        cercle = canevas.create_oval(x,y,(x+50),(y+50),width=2,fill="yellow",outline="yellow")
+        cercle = canevas.create_oval(x1,y1,(x1+50),(y1+50),width=2,fill="yellow",outline="yellow")
         label3.config(text="Tour :      " + str(tour_counter))
     if (tour_counter % 2 == 1):
-        cercle = canevas.create_oval(x,y,(x+50),(y+50),width=2,fill="red",outline="red")
+        cercle = canevas.create_oval(x1,y1,(x1+50),(y1+50),width=2,fill="red",outline="red")
         label3.config(text="Tour :      " + str(tour_counter))
     tour_counter += 1
     round()
+    deplacement()
+    
         
     
 def supprimer_cercle():
+    """ Fonction permettant de supprimer le dernier cercle créé """
     if (tour_counter % 2 == 0):
         canevas.delete(cercle)
     if (tour_counter % 2 == 1):
         canevas.delete(cercle)
        
-def deplacement1():
+'''def deplacement_1():
     for i in range(len(plateau)):
         if plateau[7][i] == 0:
             if tour == joueur1:    
                 plateau[7][i] = 1
             elif tour == joueur2:
-                plateau[7][i] = -1
+                plateau[7][i] = -1'''
 
 ''''def detection_cord():'''
 
@@ -91,8 +111,8 @@ canevas = tk.Canvas(bg="white",width=1920,height=1080)
 # Différents Labels 
 label_joueur1 = tk.Label(fenetre,text=joueur1 + "  :",font=("Times New Roman","20","italic"),bg="white")
 label_joueur2 = tk.Label(fenetre,text=joueur2 + "  :",font=("Times New Roman","20","italic"),bg="white")
-label_score_joueur1 = tk.Label(fenetre,text= str(score),font=("Times New Roman","20","italic"),bg="white")
-label_score_joueur2 = tk.Label(fenetre,text= str(score),font=("Times New Roman","20","italic"),bg="white")
+label_score_joueur1 = tk.Label(fenetre,text= '    ' + str(score),font=("Times New Roman","20","italic"),bg="white")
+label_score_joueur2 = tk.Label(fenetre,text= '    ' + str(score),font=("Times New Roman","20","italic"),bg="white")
 label = tk.Label(fenetre, text= "C'est au tour de :    " + str(tour),bg="white",font=("Times New Roman","20"))
 label3 = tk.Label(fenetre,text= "Tour :      " + str(tour_counter),bg="white",font=("Times New Roman","20"))
 
