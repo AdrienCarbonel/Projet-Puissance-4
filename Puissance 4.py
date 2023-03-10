@@ -33,20 +33,16 @@ shift_y = 30
 
 # Différentes fonctions
 
-def placement():
-    for i in range(len(plateau)):
-        for j in range(len(plateau)):
-            if (affiche_cercle) and (cercle == canevas.create_oval(x1,y1,(x1+50),(y1+50),width=2,fill="yellow",outline="yellow")):
-               plateau[i][j] == 1
-            if (affiche_cercle) and (cercle == canevas.create_oval(x1,y1,(x1+50),(y1+50),width=2,fill="red",outline="red")):
-               plateau[i][j] == -1
-    print(plateau)
+
 
 def deplacement():
     canevas.move(cercle,0,3.10*taille_case_height)
-    fenetre.after(2000000000,deplacement)
+    if canevas.coords(cercle) == (0, 3.10*taille_case_height):
+       canevas.move(cercle,0,3.10*taille_case_height-taille_case_height)
+    fenetre.after(200000000000000000,deplacement)
 
 def round():
+    """ Fonction qui détermine si c'est le tour du joueur 1 ou celui de joueur 2 selon la parité de la variable tour_counter """
     if (tour_counter % 2 == 0):
         tour = joueur1
         label.config(text ="C'est au tour de :    " + str(tour))
@@ -65,17 +61,20 @@ def affiche_cercle(event):
     if (tour_counter % 2 == 0):
         cercle = canevas.create_oval(x1,y1,(x1+50),(y1+50),width=2,fill="yellow",outline="yellow")
         label3.config(text="Tour :      " + str(tour_counter))
+        plateau[0][0] = 1
+        print(plateau)
     if (tour_counter % 2 == 1):
         cercle = canevas.create_oval(x1,y1,(x1+50),(y1+50),width=2,fill="red",outline="red")
         label3.config(text="Tour :      " + str(tour_counter))
+        plateau[0][1] = -1
     tour_counter += 1
-    round()
     deplacement()
+    round()
     
         
     
 def supprimer_cercle():
-    """ Fonction permettant de supprimer le dernier cercle créé """
+    """ Fonction permettant de supprimer le dernier cercle qui a été créé """
     if (tour_counter % 2 == 0):
         canevas.delete(cercle)
     if (tour_counter % 2 == 1):
@@ -101,23 +100,28 @@ fenetre = tk.Tk()
 fenetre.title("Un jeu de Puissance 4")  # Titre
 fenetre.geometry("1920x1080") # Dimension de la fenêtre
 fenetre.state("zoomed")
-
-
-
 # Canevas 
 canevas = tk.Canvas(bg="white",width=1920,height=1080)
 
 
 # Différents Labels 
 label_joueur1 = tk.Label(fenetre,text=joueur1 + "  :",font=("Times New Roman","20","italic"),bg="white")
+
 label_joueur2 = tk.Label(fenetre,text=joueur2 + "  :",font=("Times New Roman","20","italic"),bg="white")
-label_score_joueur1 = tk.Label(fenetre,text= '    ' + str(score),font=("Times New Roman","20","italic"),bg="white")
-label_score_joueur2 = tk.Label(fenetre,text= '    ' + str(score),font=("Times New Roman","20","italic"),bg="white")
+
+label_score_joueur1 = tk.Label(fenetre,text= '  ' + str(score),font=("Times New Roman","20","italic"),bg="white")
+
+label_score_joueur2 = tk.Label(fenetre,text= '  ' + str(score),font=("Times New Roman","20","italic"),bg="white")
+
 label = tk.Label(fenetre, text= "C'est au tour de :    " + str(tour),bg="white",font=("Times New Roman","20"))
+
 label3 = tk.Label(fenetre,text= "Tour :      " + str(tour_counter),bg="white",font=("Times New Roman","20"))
 
 
+
 # Bouton pour supprimer un cercle
+
+
 suppression_cercle = tk.Button(fenetre,text="Supprimer un cercle",command= supprimer_cercle,bg="red",fg="yellow",height=3,font=("Times New Roman","20","italic"))
 
 
@@ -135,12 +139,19 @@ for i in range(max(grid_height,grid_width)+1):
 
 # Placement des Widgets
 label.place(x=1200,y=700)
+
 label3.place(x=1200,y=650)
+
 suppression_cercle.place(x=500,y=650)
+
 label_joueur1.place(x=1200,y=100)
+
 label_joueur2.place(x=1200,y=400)
+
 label_score_joueur1.place(x=1300,y=100)
+
 label_score_joueur2.place(x=1300,y=400)
+
 canevas.grid()
 
 
