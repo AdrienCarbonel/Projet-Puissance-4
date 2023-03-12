@@ -73,6 +73,7 @@ def affiche_cercle(event):
         cercle = canevas.create_oval(x1,y1,(x1+50),(y1+50),width=2,fill="red",outline="red")
         label3.config(text="Tour :      " + str(tour_counter))
         print(canevas.coords(cercle))
+    deplacement()
     placement_cercle()
     round()
     
@@ -161,16 +162,19 @@ def placement_cercle():
         plateau[5][6] = -1
     print(plateau)
         
-       
-'''def deplacement_1():
-    for i in range(len(plateau)):
-        if plateau[7][i] == 0:
-            if tour == joueur1:    
-                plateau[7][i] = 1
-            elif tour == joueur2:
-                plateau[7][i] = -1'''
 
-''''def detection_cord():'''
+
+"""def deplacement():
+    canevas.move(cercle,0,3*taille_case_height)
+    for i in range(len(plateau)-1,0,-1):
+        for j in range(len(plateau)):
+            if (plateau[i][j] == 1) or (plateau[i][j] == -1):
+                canevas.move(cercle,0,3*taille_case_height-0.57*i*taille_case_height)
+                print(i,j)"""
+            
+    
+
+
 
 
     
