@@ -1,6 +1,7 @@
 import tkinter as tk
 import random as rd 
 
+
 joueur1 = input("Entrez le nom du joueur 1 : ")
 joueur2 = input("Entrez le nom du joueur 2 : ")
 
@@ -33,22 +34,28 @@ shift_y = 30
 
 # Différentes fonctions
 
+def coordonnees(event):
+    print("J'ai cliqué aux coordonnées    :",event.x,event.y)
+
+    
 
 
 def deplacement():
-    canevas.move(cercle,0,3.10*taille_case_height)
-    if canevas.coords(cercle) == (0, 3.10*taille_case_height):
-       canevas.move(cercle,0,3.10*taille_case_height-taille_case_height)
+    canevas.move(cercle,0,3.10*taille_case_height-0.75*taille_case_height)
     fenetre.after(200000000000000000,deplacement)
 
 def round():
+    global tour_counter
     """ Fonction qui détermine si c'est le tour du joueur 1 ou celui de joueur 2 selon la parité de la variable tour_counter """
     if (tour_counter % 2 == 0):
+        tour_counter += 1
         tour = joueur1
         label.config(text ="C'est au tour de :    " + str(tour))
     elif (tour_counter % 2 == 1):
+        tour_counter += 1
         tour = joueur2
         label.config(text= "C'est au tour de :    " + str(tour))
+        
 
 
 
@@ -61,24 +68,99 @@ def affiche_cercle(event):
     if (tour_counter % 2 == 0):
         cercle = canevas.create_oval(x1,y1,(x1+50),(y1+50),width=2,fill="yellow",outline="yellow")
         label3.config(text="Tour :      " + str(tour_counter))
-        plateau[0][0] = 1
-        print(plateau)
-    if (tour_counter % 2 == 1):
+        print(canevas.coords(cercle))
+    elif (tour_counter % 2 == 1):
         cercle = canevas.create_oval(x1,y1,(x1+50),(y1+50),width=2,fill="red",outline="red")
         label3.config(text="Tour :      " + str(tour_counter))
-        plateau[0][1] = -1
-    tour_counter += 1
-    deplacement()
+        print(canevas.coords(cercle))
+    placement_cercle()
     round()
+    
     
         
     
 def supprimer_cercle():
     """ Fonction permettant de supprimer le dernier cercle qui a été créé """
+    global tour_counter
     if (tour_counter % 2 == 0):
-        canevas.delete(cercle)
+        if (tour == joueur1):
+            canevas.delete(cercle)
+            tour_counter -= 1
+            label.config(text= "C'est au tour de :    " + str(tour))
     if (tour_counter % 2 == 1):
         canevas.delete(cercle)
+        tour_counter -= 1
+        label.config(text= "C'est au tour de :    " + str(tour))
+        
+
+    
+
+def update():
+    global tour_counter
+    if supprimer_cercle() == True:
+        tour_counter -= 1
+        label.config(text= "C'est au tour de :    " + str(tour))
+
+def placement_cercle():
+    """ Fonction permettant de placer un 1 ou -1 ( selon si le cercle est rouge ou jaune ) à l'indice i,j de plateau """
+    if (52 <= canevas.coords(cercle)[2] <= 185) and (492 <= canevas.coords(cercle)[3] <= 569) and (tour_counter % 2 == 0):
+        plateau[6][0] = 1
+    elif (52 <= canevas.coords(cercle)[2] <= 185) and (492 <= canevas.coords(cercle)[3] <= 569) and (tour_counter % 2 == 1):
+        plateau[6][0] = -1
+    elif (187 <= canevas.coords(cercle)[2] <= 324) and (492 <= canevas.coords(cercle)[3] <= 569) and (tour_counter % 2 == 0):
+        plateau[6][1] = 1
+    elif (187 <= canevas.coords(cercle)[2] <= 324) and (493 <= canevas.coords(cercle)[3] <= 569) and (tour_counter % 2 == 1):
+        plateau[6][1] = -1
+    elif (326 <= canevas.coords(cercle)[2] <= 460) and (493 <= canevas.coords(cercle)[3] <= 569) and (tour_counter % 2 == 0):
+        plateau[6][2] = 1
+    elif (326 <= canevas.coords(cercle)[2] <= 460) and (493 <= canevas.coords(cercle)[3] <= 569) and (tour_counter % 2 == 1):
+        plateau[6][2] = -1
+    elif (461 <= canevas.coords(cercle)[2] <= 596) and (493 <= canevas.coords(cercle)[3] <= 569) and (tour_counter % 2 == 0):
+        plateau[6][3] = 1
+    elif (461 <= canevas.coords(cercle)[2] <= 596) and (493 <= canevas.coords(cercle)[3] <= 569) and (tour_counter % 2 == 1):
+        plateau[6][3] = -1
+    elif (599 <= canevas.coords(cercle)[2] <= 734) and (493 <= canevas.coords(cercle)[3] <= 569) and (tour_counter % 2 == 0):
+        plateau[6][4] = 1
+    elif (599 <= canevas.coords(cercle)[2] <= 734) and (493 <= canevas.coords(cercle)[3] <= 569) and (tour_counter % 2 == 1):
+        plateau[6][4] = -1
+    elif (737 <= canevas.coords(cercle)[2] <= 872) and (493 <= canevas.coords(cercle)[3] <= 569) and (tour_counter % 2 == 0):
+        plateau[6][5] = 1
+    elif (737 <= canevas.coords(cercle)[2] <= 872) and (493 <= canevas.coords(cercle)[3] <= 569) and (tour_counter % 2 == 1):
+        plateau[6][5] = -1
+    elif (874 <= canevas.coords(cercle)[2] <= 1009) and (493 <= canevas.coords(cercle)[3] <= 569) and (tour_counter % 2 == 0):
+        plateau[6][6] = 1
+    elif (874 <= canevas.coords(cercle)[2] <= 1009) and (493 <= canevas.coords(cercle)[3] <= 569) and (tour_counter % 2 == 1):
+        plateau[6][6] = -1
+    elif (50 <= canevas.coords(cercle)[2] <= 187) and (414 <= canevas.coords(cercle)[3] <= 492) and (tour_counter % 2 == 0):
+        plateau[5][0] = 1
+    elif (50 <= canevas.coords(cercle)[2] <= 187) and (414 <= canevas.coords(cercle)[3] <= 492) and (tour_counter % 2 == 1):
+        plateau[5][0] = -1
+    elif (187 <= canevas.coords(cercle)[2] <= 324) and (414 <= canevas.coords(cercle)[3] <= 492) and (tour_counter % 2 == 0):
+        plateau[5][1] = 1
+    elif (187 <= canevas.coords(cercle)[2] <= 324) and (414 <= canevas.coords(cercle)[3] <= 492) and (tour_counter % 2 == 1):
+        plateau[5][1] = -1
+    elif (324 <= canevas.coords(cercle)[2] <= 461) and (414 <= canevas.coords(cercle)[3] <= 492) and (tour_counter % 2 == 0):
+        plateau[5][2] = 1
+    elif (324 <= canevas.coords(cercle)[2] <= 461) and (414 <= canevas.coords(cercle)[3] <= 492) and (tour_counter % 2 == 1):
+        plateau[5][2] = -1
+    elif (461 <= canevas.coords(cercle)[2] <= 597) and (414 <= canevas.coords(cercle)[3] <= 492) and (tour_counter % 2 == 0):
+        plateau[5][3] = 1
+    elif (461 <= canevas.coords(cercle)[2] <= 597) and (414 <= canevas.coords(cercle)[3] <= 492) and (tour_counter % 2 == 1):
+        plateau[5][3] = -1
+    elif (598 <= canevas.coords(cercle)[2] <= 735) and (414 <= canevas.coords(cercle)[3] <= 492) and (tour_counter % 2 == 0):
+        plateau[5][4] = 1
+    elif (598 <= canevas.coords(cercle)[2] <= 735) and (414 <= canevas.coords(cercle)[3] <= 492) and (tour_counter % 2 == 1):
+        plateau[5][4] = -1
+    elif (737 <= canevas.coords(cercle)[2] <= 873) and (414 <= canevas.coords(cercle)[3] <= 492) and (tour_counter % 2 == 0):
+        plateau[5][5] = 1 
+    elif (737 <= canevas.coords(cercle)[2] <= 873) and (414 <= canevas.coords(cercle)[3] <= 492) and (tour_counter % 2 == 1):
+        plateau[5][5] = -1
+    elif (873 <= canevas.coords(cercle)[2] <= 1009) and (414 <= canevas.coords(cercle)[3] <= 492) and (tour_counter % 2 == 0):
+        plateau[5][6] = 1
+    elif (873 <= canevas.coords(cercle)[2] <= 1009) and (414 <= canevas.coords(cercle)[3] <= 492) and (tour_counter % 2 == 1):
+        plateau[5][6] = -1
+    print(plateau)
+        
        
 '''def deplacement_1():
     for i in range(len(plateau)):
@@ -159,8 +241,7 @@ canevas.grid()
 
 
 canevas.bind('<Button-1>', affiche_cercle)
-
-
+canevas.bind("<Button-3>", coordonnees)
 fenetre.mainloop()
 
 
