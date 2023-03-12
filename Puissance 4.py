@@ -73,7 +73,6 @@ def affiche_cercle(event):
         cercle = canevas.create_oval(x1,y1,(x1+50),(y1+50),width=2,fill="red",outline="red")
         label3.config(text="Tour :      " + str(tour_counter))
         print(canevas.coords(cercle))
-    deplacement()
     placement_cercle()
     round()
     
@@ -160,6 +159,36 @@ def placement_cercle():
         plateau[5][6] = 1
     elif (873 <= canevas.coords(cercle)[2] <= 1009) and (414 <= canevas.coords(cercle)[3] <= 492) and (tour_counter % 2 == 1):
         plateau[5][6] = -1
+    elif (50 <= canevas.coords(cercle)[2] <= 187) and (339 <= canevas.coords(cercle)[3] <= 413) and (tour_counter % 2 == 0):
+        plateau[4][0] = 1
+    elif (50 <= canevas.coords(cercle)[2] <= 187) and (339 <= canevas.coords(cercle)[3] <= 413) and (tour_counter % 2 == 1):
+        plateau[4][0] = -1
+    elif (187 <= canevas.coords(cercle)[2] <= 324) and (339 <= canevas.coords(cercle)[3] <= 413) and (tour_counter % 2 == 0):
+        plateau[4][1] = 1
+    elif (187 <= canevas.coords(cercle)[2] <= 324) and (339 <= canevas.coords(cercle)[3] <= 413) and (tour_counter % 2 == 1):
+        plateau[4][1] = -1
+    elif (325 <= canevas.coords(cercle)[2] <= 460) and (339 <= canevas.coords(cercle)[3] <= 413) and (tour_counter % 2 == 0):
+        plateau[4][2] = 1
+    elif (325 <= canevas.coords(cercle)[2] <= 460) and (339 <= canevas.coords(cercle)[3] <= 413) and (tour_counter % 2 == 1):
+        plateau[4][2] = -1
+    elif (462 <= canevas.coords(cercle)[2] <= 598) and (339 <= canevas.coords(cercle)[3] <= 413) and (tour_counter % 2 == 0):
+        plateau[4][3] = 1
+    elif (462 <= canevas.coords(cercle)[2] <= 598) and (339 <= canevas.coords(cercle)[3] <= 413) and (tour_counter % 2 == 1):
+        plateau[4][3] = -1
+    elif (600 <= canevas.coords(cercle)[2] <= 735) and (339 <= canevas.coords(cercle)[3] <= 420) and (tour_counter % 2 == 0):
+        plateau[4][4] = 1
+    elif (600 <= canevas.coords(cercle)[2] <= 735) and (339 <= canevas.coords(cercle)[3] <= 413) and (tour_counter % 2 == 1):
+        plateau[4][4] = -1
+    elif (736 <= canevas.coords(cercle)[2] <= 873) and (339 <= canevas.coords(cercle)[3] <= 413) and (tour_counter % 2 == 0):
+        plateau[4][5] = 1
+    elif (736 <= canevas.coords(cercle)[2] <= 873) and (339 <= canevas.coords(cercle)[3] <= 413) and (tour_counter % 2 == 1):
+        plateau[4][5] = -1
+    elif (873 <= canevas.coords(cercle)[2] <= 1009) and (339 <= canevas.coords(cercle)[3] <= 413) and (tour_counter % 2 == 0):
+        plateau[4][6] = 1
+    elif (873 <= canevas.coords(cercle)[2] <= 1009) and (339 <= canevas.coords(cercle)[3] <= 413) and (tour_counter % 2 == 1):
+        plateau[4][6] = -1
+    
+    
     print(plateau)
         
 
